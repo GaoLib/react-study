@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import Form, {Field} from "rc-field-form";
-// import Form, {Field} from "../components/k-rc-field-form/";
+// import Form, {Field} from "rc-field-form";
+import Form, {Field} from "../components/g-rc-field-form/";
 
 import Input from "../components/Input";
 
@@ -20,8 +20,8 @@ export default function MyRCFieldForm(props) {
 
   useEffect(() => {
     console.log("form", form); //sy-log
-    form.setFieldsValue({username: "default"});
-  }, []);
+    // form.setFieldsValue({username: "default"});
+  });
 
   return (
     <div>
