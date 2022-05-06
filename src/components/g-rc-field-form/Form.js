@@ -1,9 +1,5 @@
-function Form(props) {
-  return (
-    <div>
-      <h3>Form</h3>
-    </div>
-  )
+function Form({ children }) {
+  return children
 }
 
 export default Form

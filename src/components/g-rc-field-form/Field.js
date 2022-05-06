@@ -1,12 +1,20 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 class Field extends Component {
+
+  getControlled() {
+    return {
+      value: 'omg',
+      onChange: (e) => {
+        const newValue = e.target.value
+        console.log(newValue)
+      }
+    }
+  }
+
   render() {
-    return (
-      <div>
-        <h3>Field</h3>
-      </div>
-    )
+    const { children } = this.props
+    return React.cloneElement(children, this.getControlled())
   }
 }
 
