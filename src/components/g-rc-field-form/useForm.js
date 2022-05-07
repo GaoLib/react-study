@@ -1,3 +1,5 @@
+import React from 'react'
+
 class FormStore {
   constructor() {
     this.store = {}
@@ -17,9 +19,23 @@ class FormStore {
       ...newStore
     }
   }
+
+  getForm = () => {
+    return {
+      getFieldsValue: this.getFieldsValue,
+      getFieldValue: this.getFieldValue,
+      setFieldsValue: this.setFieldsValue,
+    }
+  }
 }
 
 
 export default function useForm() {
-  return []
+  const formRef = React.useRef()
+  if (!formRef.current) {
+    const formStore = new FormStore()
+    formRef.current = formStore.getForm()
+  }
+  
+  return [formRef.current]
 }
