@@ -3,6 +3,12 @@ import React from 'react'
 class FormStore {
   constructor() {
     this.store = {}
+    this.fieldEntities = []
+  }
+
+  // 注册 Field 组件
+  registerFieldEntities = (entity) => {
+    this.fieldEntities.push(entity)
   }
 
   getFieldsValue = () => {
@@ -14,10 +20,15 @@ class FormStore {
   }
 
   setFieldsValue = (newStore) => {
+    // 1. 修改 store 值
     this.store = {
       ...this.store,
       ...newStore
     }
+    // 2. 更新组件
+    this.fieldEntities.forEach(entity => {
+      entity.onStoreChange()
+    })
   }
 
   getForm = () => {
@@ -25,16 +36,21 @@ class FormStore {
       getFieldsValue: this.getFieldsValue,
       getFieldValue: this.getFieldValue,
       setFieldsValue: this.setFieldsValue,
+      registerFieldEntities: this.registerFieldEntities,
     }
   }
 }
 
 
-export default function useForm() {
+export default function useForm(form) {
   const formRef = React.useRef()
   if (!formRef.current) {
-    const formStore = new FormStore()
-    formRef.current = formStore.getForm()
+    if (form) {
+      formRef.current = form
+    } else {
+      const formStore = new FormStore()
+      formRef.current = formStore.getForm()
+    }
   }
   
   return [formRef.current]
