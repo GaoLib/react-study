@@ -9,6 +9,10 @@ class FormStore {
   // 注册 Field 组件
   registerFieldEntities = (entity) => {
     this.fieldEntities.push(entity)
+    return () => {
+      this.fieldEntities = this.fieldEntities.filter(en => en !== entity)
+      delete this.store[entity.props.name]
+    }
   }
 
   getFieldsValue = () => {
@@ -27,7 +31,11 @@ class FormStore {
     }
     // 2. 更新组件
     this.fieldEntities.forEach(entity => {
-      entity.onStoreChange()
+      Object.keys(newStore).forEach(k => {
+        if (k === entity.props.name) {
+          entity.onStoreChange()
+        }
+      })
     })
   }
 

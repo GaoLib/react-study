@@ -10,7 +10,11 @@ class Field extends Component {
   }
 
   componentDidMount() {
-    this.context.registerFieldEntities(this)
+    this.unRegister = this.context.registerFieldEntities(this)
+  }
+
+  componentWillUnmount() {
+    if (this.unRegister) this.unRegister()
   }
 
   getControlled() {
