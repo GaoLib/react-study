@@ -4,6 +4,14 @@ class FormStore {
   constructor() {
     this.store = {}
     this.fieldEntities = []
+    this.callbacks = {}
+  }
+
+  setCallbacks = (newCallback) => {
+    this.callbacks = {
+      ...this.callbacks,
+      ...newCallback,
+    }
   }
 
   // 注册 Field 组件
@@ -39,12 +47,29 @@ class FormStore {
     })
   }
 
+  validate = () => {
+    let err = []
+    return err
+  }
+
+  submit = () => {
+    let err = this.validate()
+    const { onFinish, onFinishFailed } = this.callbacks
+    if (!err.length) {
+      onFinish(this.getFieldsValue())
+    } else {
+      onFinishFailed(err, this.getFieldsValue())
+    }
+  }
+
   getForm = () => {
     return {
       getFieldsValue: this.getFieldsValue,
       getFieldValue: this.getFieldValue,
       setFieldsValue: this.setFieldsValue,
       registerFieldEntities: this.registerFieldEntities,
+      submit: this.submit,
+      setCallbacks: this.setCallbacks,
     }
   }
 }
