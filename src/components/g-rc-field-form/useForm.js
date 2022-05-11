@@ -49,6 +49,7 @@ class FormStore {
 
   validate = () => {
     let err = []
+    // todo validate
     return err
   }
 
