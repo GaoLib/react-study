@@ -49,7 +49,17 @@ class FormStore {
 
   validate = () => {
     let err = []
-    // todo validate
+    this.fieldEntities.forEach((field) => {
+      const {name, rules} = field.props
+      const rule = rules && rules[0]
+      const value = this.getFieldValue(name)
+      if (rule && rule.required && (value === undefined || value === '')) {
+        err.push({
+          [name]: rule.message,
+          value
+        })
+      }
+    })
     return err
   }
 
