@@ -1,8 +1,8 @@
 // import {createStore, applyMiddleware} from "redux";
-import {createStore} from "../gRedux/";
-// import thunk from "redux-thunk";
-// import logger from "redux-logger";
-// import promise from "redux-promise";
+import {createStore, applyMiddleware} from "../gRedux/";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import promise from "redux-promise";
 // import isPromise from "is-promise";
 
 // 定义修改规则
@@ -21,7 +21,7 @@ function countReducer(state = 0, action) {
 const store = createStore(
   countReducer,
   // combineReducers({count: countReducer}),
-  // applyMiddleware(thunk, promise, logger)
+  applyMiddleware(thunk, promise, logger)
 );
 
 export default store;

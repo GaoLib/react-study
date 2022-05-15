@@ -1,4 +1,7 @@
-export default function createStore(reducer) {
+export default function createStore(reducer, enhancer) {
+  if (enhancer) {
+    return enhancer(createStore)(reducer)
+  }
   let currentState
   let currentListeners = []
 
@@ -9,10 +12,15 @@ export default function createStore(reducer) {
   function dispatch(action) {
     currentState = reducer(currentState, action)
     currentListeners.forEach(listener => listener())
+    return action
   }
 
   function subscribe(listener) {
     currentListeners.push(listener)
+    return () => {
+      const index = currentListeners.indexOf(listener)
+      currentListeners.splice(index, 1)
+    }
   }
 
   dispatch({type: 'REDUX_INIT'})
