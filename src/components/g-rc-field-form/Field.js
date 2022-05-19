@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useReducer } from "react";
 import FieldContext from "./FieldContext";
 
 class Field extends Component {
@@ -36,3 +36,13 @@ class Field extends Component {
 }
 
 export default Field;
+
+// export default function Field(props) {
+//   const { children, name } = props
+//   const context = useContext(FieldContext)
+
+//   const [forceUpdate] = useReducer((x) => x + 1, 0)
+
+//   const returnChildNode = React.cloneElement(children, getControlled())
+//   return returnChildNode
+// }
