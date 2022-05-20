@@ -1,4 +1,4 @@
-import React, { Component, useContext, useReducer } from "react";
+import React, { Component, useContext, useLayoutEffect, useReducer } from "react";
 import FieldContext from "./FieldContext";
 
 class Field extends Component {
@@ -42,6 +42,32 @@ export default Field;
 //   const context = useContext(FieldContext)
 
 //   const [forceUpdate] = useReducer((x) => x + 1, 0)
+
+//   useLayoutEffect(() => {
+//     const unRegister = context.registerFieldEntities({
+//       props,
+//       onStoreChange,
+//     })
+
+//     return () => {
+//       unRegister()
+//     }
+//   }, [])
+
+//   onStoreChange = () => {
+//     forceUpdate()
+//   }
+
+//   getControlled = () => {
+//     const { setFieldsValue, getFieldValue } = context
+//     return {
+//       value: getFieldValue(name),
+//       onChange: (e) => {
+//         const newValue = e.target.value
+//         setFieldsValue({[name]: newValue })
+//       }
+//     }
+//   }
 
 //   const returnChildNode = React.cloneElement(children, getControlled())
 //   return returnChildNode
