@@ -1,7 +1,8 @@
 // import logo from './logo.svg';
 // import AntdFormPage from "./pages/AntdFormPage";
-import MyRCFieldForm from "./pages/MyRCFieldForm";
+// import MyRCFieldForm from "./pages/MyRCFieldForm";
 // import ReduxPage from "./pages/ReduxPage";
+import ReactReduxPage from "./pages/ReactReduxPage";
 import './App.css';
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header> */}
-      <MyRCFieldForm />
+      {/* <MyRCFieldForm /> */}
       {/* <ReduxPage /> */}
+      <ReactReduxPage />
     </div>
   );
 }
