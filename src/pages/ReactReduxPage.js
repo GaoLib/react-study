@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from '../gReactRedux'
 
 class ReactReduxPage extends Component {
   render() {
@@ -23,9 +25,23 @@ class ReactReduxPage extends Component {
   }
 }
 
-export default connect((state) => {
+export default connect(
+  // mapStateToProps
+  (state) => {
   return {count: state.count}
-},{
-  add: () => ({type: 'ADD'}),
-  minus: () => ({type: 'MINUS'})
-})(ReactReduxPage)
+},
+  // mapDispatchToProps  object | function
+// {
+//   add: () => ({type: 'ADD'}),
+//   minus: () => ({type: 'MINUS'})
+// }
+  (dispatch) => {
+    let creators = {
+      add: () => ({type: 'ADD'}),
+      minus: () => ({type: 'MINUS'})
+    }
+
+    creators = bindActionCreators(creators, dispatch)
+    return { dispatch, ...creators }
+  }
+)(ReactReduxPage)
