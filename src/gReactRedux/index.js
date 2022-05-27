@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 
 const Context = React.createContext()
 
@@ -11,7 +11,18 @@ export function Provider({ store, children }) {
 export const connect = (mapStateToProps, mapDispatchToProps) => (
   WarpperComponent
 ) => (props) => {
-  return <WarpperComponent />
+  const store = useContext(Context)
+  const stateProps = mapStateToProps(store.getState())
+  const dispatchProps = { dispatch: store.dispatch }
+
+  const [, forceUpdate] = useReducer((x) => x+1, 0)
+  useEffect(() => {
+    store.subscribe(() => {
+      forceUpdate()
+    })
+  }, [store])
+
+  return <WarpperComponent {...props} {...stateProps} {...dispatchProps} />
 }
 
 function bindActionCreator(creator, dispatch) {
