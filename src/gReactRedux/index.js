@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 
 const Context = React.createContext()
 
@@ -8,6 +8,14 @@ export function Provider({ store, children }) {
   </Context.Provider>
 }
 
+function useForceUpdate() {
+  const [, setState] = useState(0)
+  const update = useCallback(() => {
+    setState((prev) => prev + 1)
+  }, [])
+  return update
+}
+
 export const connect = (mapStateToProps, mapDispatchToProps) => (
   WarpperComponent
 ) => (props) => {
@@ -15,7 +23,7 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (
   const stateProps = mapStateToProps(store.getState())
   const dispatchProps = { dispatch: store.dispatch }
 
-  const [, forceUpdate] = useReducer((x) => x+1, 0)
+  const forceUpdate = useForceUpdate()
   useEffect(() => {
     store.subscribe(() => {
       forceUpdate()
