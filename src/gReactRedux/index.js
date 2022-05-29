@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useLayoutEffect, useState } from 'react'
 
 const Context = React.createContext()
 
@@ -21,13 +21,23 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (
 ) => (props) => {
   const store = useContext(Context)
   const stateProps = mapStateToProps(store.getState())
-  const dispatchProps = { dispatch: store.dispatch }
+  let dispatchProps = { dispatch: store.dispatch }
+
+  if (typeof mapDispatchToProps === 'function') {
+    dispatchProps = mapDispatchToProps(store.dispatch)
+  } else if (typeof mapDispatchToProps === 'object') {
+    dispatchProps = bindActionCreators(mapDispatchToProps, store.dispatch)
+  }
 
   const forceUpdate = useForceUpdate()
-  useEffect(() => {
-    store.subscribe(() => {
+  useLayoutEffect(() => {
+    const unsubscribe = store.subscribe(() => {
       forceUpdate()
     })
+
+    return () => {
+      unsubscribe()
+    }
   }, [store])
 
   return <WarpperComponent {...props} {...stateProps} {...dispatchProps} />
