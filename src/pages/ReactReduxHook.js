@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
+// import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "../gReactRedux"
 
 function ReactReduxHookPage(props) {
   const dispatch = useDispatch()

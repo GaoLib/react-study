@@ -57,3 +57,33 @@ export function bindActionCreators(creators, dispatch) {
 
   return obj
 }
+
+// 自定义 hooks api
+function useStore() {
+  const store = useContext(Context)
+  return store
+}
+
+export function useSelector(selector) {
+  const store = useStore()
+  const selectedState = selector(store.getState())
+
+  // 订阅
+  const forceUpdate = useForceUpdate()
+  useLayoutEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      forceUpdate()
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [store])
+
+  return selectedState
+}
+
+export function useDispatch() {
+  const store = useStore()
+  return store.dispatch
+}
