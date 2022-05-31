@@ -1,7 +1,7 @@
 // import AntdFormPage from "./pages/AntdFormPage";
 // import MyRCFieldForm from "./pages/MyRCFieldForm";
 // import ReduxPage from "./pages/ReduxPage";
-import ReactReduxPage from "./pages/ReactReduxPage";
+// import ReactReduxPage from "./pages/ReactReduxPage";
 import ReactReduxHookPage from "./pages/ReactReduxHook";
 import './App.css';
 
