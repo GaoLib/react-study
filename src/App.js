@@ -35,7 +35,7 @@ function App() {
           <Route path="/redux" element={<ReduxPage />}/>
           {/* <ReactReduxHookPage /> */}
           <Route path="/reactReduxHook" element={<ReactReduxHookPage />}/>
-          <Route path='/foo/:id' element={<Foo />} />
+          <Route path='/foo/*' element={<Foo />} />
           <Route path="*" element={<ReactReduxPage />}/>
         </Routes>
       </BrowserRouter>
@@ -44,8 +44,32 @@ function App() {
 }
 
 function Foo() {
+  return (
+    <div>
+      <Link to="me">ME</Link>
+      <Routes>
+        <Route path="me" element={<FooChild />}></Route>
+        <Route path=":id" element={<FooOtherChild />}></Route>
+      </Routes>
+    </div>
+  )
+}
+
+function FooChild() {
+  return (
+    <div>
+      Meeeeee
+    </div>
+  )
+}
+
+function FooOtherChild() {
   const params = useParams()
-  return <div>Foo {params.id}</div>
+  return (
+    <div>
+      FooOtherChild {params.id}
+    </div>
+  )
 }
 
 export default App;
