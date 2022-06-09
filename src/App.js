@@ -3,6 +3,21 @@ import MyRCFieldForm from "./pages/MyRCFieldForm";
 import ReduxPage from "./pages/ReduxPage";
 import ReactReduxPage from "./pages/ReactReduxPage";
 import ReactReduxHookPage from "./pages/ReactReduxHook";
+// import {
+//   BrowserRouter,
+//   Routes,
+//   Route,
+//   Link,
+//   // Switch,
+//   // Redirect,
+//   // useHistory,
+//   // useLocation,
+//   // useRouteMatch,
+//   useParams,
+//   // withRouter,
+//   // Prompt,
+// } from "react-router-dom";
+import './App.css';
 import {
   BrowserRouter,
   Routes,
@@ -13,11 +28,10 @@ import {
   // useHistory,
   // useLocation,
   // useRouteMatch,
-  useParams,
+  // useParams,
   // withRouter,
   // Prompt,
-} from "react-router-dom";
-import './App.css';
+} from "./gReactRouter";
 
 function App() {
   return (
@@ -35,7 +49,7 @@ function App() {
           <Route path="/redux" element={<ReduxPage />}/>
           {/* <ReactReduxHookPage /> */}
           <Route path="/reactReduxHook" element={<ReactReduxHookPage />}/>
-          <Route path='/foo/*' element={<Foo />} />
+          {/* <Route path='/foo/*' element={<Foo />} /> */}
           <Route path="*" element={<ReactReduxPage />}/>
         </Routes>
       </BrowserRouter>
@@ -49,7 +63,7 @@ function Foo() {
       <Link to="me">ME</Link>
       <Routes>
         <Route path="me" element={<FooChild />}></Route>
-        <Route path=":id" element={<FooOtherChild />}></Route>
+        {/* <Route path=":id" element={<FooOtherChild />}></Route> */}
       </Routes>
     </div>
   )
@@ -63,13 +77,13 @@ function FooChild() {
   )
 }
 
-function FooOtherChild() {
-  const params = useParams()
-  return (
-    <div>
-      FooOtherChild {params.id}
-    </div>
-  )
-}
+// function FooOtherChild() {
+//   const params = useParams()
+//   return (
+//     <div>
+//       FooOtherChild {params.id}
+//     </div>
+//   )
+// }
 
 export default App;
