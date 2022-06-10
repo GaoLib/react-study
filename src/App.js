@@ -41,7 +41,7 @@ function App() {
           <Link to="/">MyRCFieldForm</Link>
           <Link to="/redux">ReduxPage</Link>
           <Link to="/reactReduxHook">ReactReduxHookPage</Link>
-          <Link to="/foo/123">Foo</Link>
+          {/* <Link to="/foo/123">Foo</Link> */}
         </div>
 
         <Routes>
