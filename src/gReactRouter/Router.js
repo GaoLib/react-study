@@ -2,8 +2,17 @@ import { Component } from "react";
 import RouterContext from "./RouterContext";
 
 export default class Router extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      location: props.history.location
+    }
+    props.history.listen((location) => {
+      this.setState({location})
+    })
+  }
   render() {
-    return <RouterContext.Provider value={this.props.history}>
+    return <RouterContext.Provider value={{history: this.props.history, location: this.state.location }}>
       {this.props.children}
     </RouterContext.Provider>
   }

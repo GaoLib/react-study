@@ -5,8 +5,7 @@ function Link({to, children, ...rest}) {
   const routerCtx = useContext(RouterContext)
   const handle = (e) => {
     e.preventDefault()
-    console.log(routerCtx)
-    routerCtx.push(to)
+    routerCtx.history.push(to)
   }
   return (
     <a href={to} {...rest} onClick={handle}>{ children }</a>
