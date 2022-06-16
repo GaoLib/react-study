@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import matchPath from "./matchPath";
 import RouterContext from "./RouterContext";
 
 export default class Route extends Component {
@@ -6,8 +7,8 @@ export default class Route extends Component {
     return <RouterContext.Consumer>
       {(context) => {
         const location = context.location
-        const { path, element } = this.props
-        const match = path === location.location.pathname
+        const { element } = this.props
+        const match = matchPath(location.pathname || location.location.pathname, this.props)
         return match ? element : null
       }}
     </RouterContext.Consumer>
